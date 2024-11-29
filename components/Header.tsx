@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Form from 'next/form';
 import Link from 'next/link';
@@ -7,12 +9,16 @@ import {
   SignedOut,
   SignInButton,
   UserButton,
+  useUser,
 } from '@clerk/nextjs';
 import { TrolleyIcon, PackageIcon } from '@sanity/icons';
 
 function Header() {
+  const { user } = useUser();
+
+  console.dir(user);
   return (
-    <header className="flex flex-wrap justify-between items-center px-4 py-2">
+    <header className="flex flex-wrap justify-between items-center px-4 py-2 sticky top-0 bg-white">
       <div className="flex w-full flex-wrap justify-between items-center">
         <Link href="/">Logo</Link>
         <Form
@@ -43,12 +49,24 @@ function Header() {
             <SignedIn>
               <Link
                 href="/orders"
-                className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 text-blue-500 hover:text-blue-700 font-bold py-2 px-4 rounded border border-blue-500 hover:border-blue-700"
               >
                 <PackageIcon className="w-6 h-6" />
                 <span>My Orders</span>
               </Link>
-              <UserButton />
+
+              {user ? (
+                <div className="flex items-center sm:block text-sm">
+                  <UserButton />
+
+                  <div className="hidden sm:block text-xs">
+                    <p className="text-gray-400">Welcome Back</p>
+                    <p className="font-bold">{user.fullName}!</p>
+                  </div>
+                </div>
+              ) : (
+                <SignInButton mode="modal" />
+              )}
             </SignedIn>
           </ClerkLoaded>
         </div>
