@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'next/form';
 import Link from 'next/link';
 import {
@@ -15,6 +15,15 @@ import { TrolleyIcon, PackageIcon } from '@sanity/icons';
 
 function Header() {
   const { user } = useUser();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // or a placeholder
+  }
 
   console.dir(user);
   return (
