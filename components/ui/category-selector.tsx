@@ -48,7 +48,7 @@ export function CategorySelectorCompoment({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-full p-0 bg-white">
         <Command>
           <CommandInput
             placeholder="Search category..."
