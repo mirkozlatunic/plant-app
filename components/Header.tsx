@@ -30,7 +30,7 @@ function Header() {
   }
 
   return (
-    <header className="flex flex-wrap justify-between items-center px-4 py-2 sticky top-0 bg-white border-b border-gray-100">
+    <header className="flex flex-wrap justify-between items-center px-4 py-2 sticky top-0 bg-white border-b border-gray-100 z-10">
       <div className="flex w-full flex-wrap justify-between items-center">
         <Link href="/">Logo</Link>
         <Form
