@@ -1,17 +1,44 @@
-import React from 'react';
+'use client';
 
-function Hero() {
+import * as React from 'react';
+import Autoplay from 'embla-carousel-autoplay';
+
+import { Card, CardContent } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+
+export function Hero() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
+
   return (
-    <div className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-10 mx-4 my-2 rounded-lg shadow-lg w-full">
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex-1">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-center mb-4">
-            Second Hand Store in Orange County, California
-          </h2>
-        </div>
-      </div>
-    </div>
+    <Carousel
+      plugins={[plugin.current]}
+      className="w-full max-w-xs"
+      onMouseEnter={plugin.current.stop}
+      onMouseLeave={plugin.current.reset}
+    >
+      <CarouselContent>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex w-full items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   );
 }
-
-export default Hero;

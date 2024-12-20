@@ -1,4 +1,4 @@
-import Hero from '@/components/Hero';
+import { Hero } from '@/components/Hero';
 import ProductView from '@/components/ProductView';
 import { getAllCategories } from '@/sanity/lib/products/getAllCategories';
 import { getAllProducts } from '@/sanity/lib/products/getAllProducts';
