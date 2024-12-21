@@ -11,6 +11,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { pictures } from '@/lib';
+import Image from 'next/image';
 
 export function Hero() {
   const plugin = React.useRef(
@@ -18,14 +20,30 @@ export function Hero() {
   );
 
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      className="w-full max-w-xs"
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
-    >
-      <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+    <div>
+      <h4>Welcome to our Store</h4>
+      <Carousel
+        plugins={[plugin.current]}
+        className="w-full max-w-xs"
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
+      >
+        <CarouselContent>
+          {pictures.map((picture) => (
+            <CarouselItem key={picture}>
+              <Card>
+                <CardContent>
+                  <Image
+                    src={`/pictures/${picture}`}
+                    width={300}
+                    height={300}
+                    alt={picture}
+                  />
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+          {/* {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
@@ -35,10 +53,11 @@ export function Hero() {
               </Card>
             </div>
           </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+        ))} */}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
   );
 }
