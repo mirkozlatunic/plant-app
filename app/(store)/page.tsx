@@ -1,4 +1,4 @@
-import { Hero } from '@/components/Hero';
+import WelcomeBanner from '@/components/WelcomeBanner';
 import ProductView from '@/components/ProductView';
 import { getAllCategories } from '@/sanity/lib/products/getAllCategories';
 import { getAllProducts } from '@/sanity/lib/products/getAllProducts';
@@ -14,9 +14,8 @@ export default async function Home() {
 
   return (
     <div>
+      <WelcomeBanner />
       <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4 z-20">
-        <Hero />
-
         <ProductView products={products} categories={categories} />
       </div>
     </div>
